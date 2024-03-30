@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>Table</title>
+</head>
+
+<body>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        select {
+            float: left;
+        }
+
+        img {
+            float: left;
+        }
+    </style>
+
+
+    <select onchange="handlePictureClick(this)" id="imageList" name="imageList" size="10">
+        <option selected value="pic_001.jpg">pic_001.jpg</option>
+        <option value="pic_002.jpg">pic_002.jpg</option>
+        <option value="pic_003.jpg">pic_003.jpg</option>
+        <option value="pic_004.jpg">pic_004.jpg</option>
+        <option value="pic_005.jpg">pic_005.jpg</option>
+        <option value="pic_006.jpg">pic_006.jpg</option>
+        <option value="pic_007.jpg">pic_007.jpg</option>
+        <option value="pic_008.jpg">pic_008.jpg</option>
+        <option value="pic_009.jpg">pic_009.jpg</option>
+        <option value="pic_010.jpg">pic_010.jpg</option>
+    </select>
+    <img id="imageView" src="images/pic_001.jpg">
+    <button id="btn-back" onclick="handleBackBtn(this)" type="button">Back</button>
+    <button id="btn-show" onclick="handleSlideShow(this)" type="button">Start slideshow</button>
+    <button id="btn-next" onclick="handleNextBtn(this)" type="button">Next</button>
+    <p id="imageLabel">pic_001.jpg (10/55)</p>
+</body>
+<script>
+    let imageIndex = 0
+    const imageList = document.getElementById('imageList')
+    const imageView = document.getElementById('imageView')
+    const imageLabel = document.getElementById('imageLabel')
+    const btnBack = document.getElementById('btn-back')
+    const btnNext = document.getElementById('btn-next')
+    const btnSlideShow = document.getElementById('btn-show')
+    let isSlideShow = false
+    let repeat
+
+    const displayImage = (index) => {
+        const imageName = imageList.options[index].value
+        const imageSrc = `./images/${imageName}`
+        imageView.src = imageSrc
+        imageLabel.innerHTML = imageName
+    }
+
+    const handlePictureClick = (e) => {
+        imageIndex = e.selectedIndex
+        displayImage(imageIndex)
+    }
+
+    const handleSlideShow = (e) => {
+        if (isSlideShow) {
+            isSlideShow = false
+            btnBack.disabled = false
+            btnNext.disabled = false
+            btnSlideShow.innerHTML = "Start slideshow"
+            clearInterval(repeat)
+        }
+        else {
+            isSlideShow = true
+            btnBack.disabled = true
+            btnNext.disabled = true
+            btnSlideShow.innerHTML = "Stop slideshow"
+            repeat = setInterval(handleNextBtn, 1000)
+        }
+    }
+
+    const handleNextBtn = (e) => {
+        imageIndex = imageList.selectedIndex + 1
+        if (imageIndex == imageList.length) {
+            imageIndex = 0
+        }
+        imageList.selectedIndex = imageIndex
+        displayImage(imageIndex)
+    }
+
+    const handleBackBtn = (e) => {
+        imageIndex = imageList.selectedIndex - 1
+        if (imageIndex == -1) {
+            imageIndex = imageList.length - 1
+        }
+        imageList.selectedIndex = imageIndex
+        displayImage(imageIndex)
+    }
+</script>
+
+</html>

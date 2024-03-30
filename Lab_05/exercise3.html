@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<style>
+    .puzzle-game {
+        width: 330px;
+        height: 330px;
+        display: block;
+        border: 2px solid black;
+        margin: auto;
+        margin-bottom: 16px;
+    }
+
+    .cell,
+    .puzzle-cell {
+        border-collapse: collapse;
+        width: 110px;
+        height: 110px;
+        display: flex;
+        float: left;
+        border: 1px solid black;
+        box-sizing: border-box;
+    }
+
+    .image-place {
+        width: 550px;
+        height: 220px;
+        display: block;
+        border: 2px solid black;
+        margin: auto;
+        margin-top: 16px;
+    }
+
+    img {
+        width: 100%;
+    }
+
+    .message {
+        background-color: green;
+        color: white;
+        text-align: center;
+        width: 640px;
+        height: auto;
+        margin: auto;
+        padding: 12px;
+        margin-top: 30px;
+        font-size: 24px;
+        display: none;
+    }
+</style>
+
+<body>
+    <div class="puzzle-game">
+
+    </div>
+
+    <div class="image-place"></div>
+
+    <div class="message">
+        <span style="font-weight: bold;">Congratulation!</span> You have completed the puzzle game
+    </div>
+</body>
+<script>
+
+    function drag(ev) {
+        ev.dataTransfer.setData("text", ev.target.id);
+    }
+
+    function drop(ev) {
+        ev.preventDefault();
+        var data = ev.dataTransfer.getData("text");
+        if (ev.target.childNodes.length != 0) {
+            ev.target.appendChild(document.getElementById(data));
+        }
+        if (checkPuzzle()) {
+            console.log('you win')
+            $('.message').show('slow')
+            const myTimeout = setTimeout(() => {
+                $('.message').hide('slow')
+            }, 2000)
+        }
+    }
+
+    const answer = {
+        "puzzle-cell-0-0": "./images/cntt_01.gif",
+        "puzzle-cell-0-1": "./images/cntt_02.gif",
+        "puzzle-cell-0-2": "./images/cntt_03.gif",
+        "puzzle-cell-1-0": "./images/cntt_04.gif",
+        "puzzle-cell-1-1": "./images/cntt_05.gif",
+        "puzzle-cell-1-2": "./images/cntt_06.gif",
+        "puzzle-cell-2-0": "./images/cntt_07.gif",
+        "puzzle-cell-2-1": "./images/cntt_08.gif",
+        "puzzle-cell-2-2": "./images/cntt_09.gif",
+    }
+
+    function checkPuzzle() {
+        for (let i = 0; i < 3; i++) {
+            for (let j = 0; j < 3; j++) {
+                const cellID = `puzzle-cell-${i}-${j}`
+                const imgSrc = $(`#puzzle-cell-${i}-${j}`).children().attr('src')
+                const childRotate = $(`#puzzle-cell-${i}-${j}`).children().attr('data-rotate')
+                if (!checkPositionImage(imgSrc, cellID, childRotate)) {
+                    return false
+                }
+            }
+        }
+        return true
+    }
+
+    function checkPositionImage(imgSrc, cellID, childRotate) {
+        if (childRotate != '0') return false
+        return answer[cellID] === imgSrc
+    }
+
+    function isStandingPic(childRotate) {
+        return childRotate == '0'
+    }
+
+    function allowDrop(ev) {
+        ev.preventDefault();
+    }
+
+    const imageList = [
+        './images/cntt_01.gif',
+        './images/cntt_02.gif',
+        './images/cntt_03.gif',
+        './images/cntt_04.gif',
+        './images/cntt_05.gif',
+        './images/cntt_06.gif',
+        './images/cntt_07.gif',
+        './images/cntt_08.gif',
+        './images/cntt_09.gif',
+        './images/cntt_10.gif',
+    ]
+
+    for (let i = 0; i < 3; i++) {
+        for (let j = 0; j < 3; j++) {
+            const cell = `
+            <div id="puzzle-cell-${i}-${j}" class="cell" ondrop="drop(event)" ondragover="allowDrop(event)">
+            </div>`
+            $('.puzzle-game').append(cell)
+        }
+    }
+
+    for (let i = 0; i < 2; i++) {
+        for (let j = 0; j < 5; j++) {
+            const random = Math.floor(Math.random() * imageList.length)
+            const image = imageList.splice(random, 1)
+            const randomRotate = Math.floor(Math.random() * 4) * 90
+            const cell = `
+            <div id="image-place-cell-${i}-${j}" class="puzzle-cell" ondrop="drop(event)" ondragover="allowDrop(event)">
+                <img 
+                    class="puzzle-pieces" 
+                    id="image-${i}-${j}" 
+                    src="${image}" 
+                    draggable="true" 
+                    ondragstart="drag(event)"
+                    style="transform:rotate(${randomRotate}deg)"
+                    data-rotate="${randomRotate}"
+                    />
+            </div>`
+            $('.image-place').append(cell)
+        }
+    }
+
+    jQuery.fn.rotate = function (degrees) {
+        $(this).css({ 'transform': 'rotate(' + degrees + 'deg)' });
+        return $(this);
+    };
+
+    $('.puzzle-pieces').click(function () {
+        let rotation = $(this).attr('data-rotate')
+        rotation = parseInt(rotation)
+        rotation += 90;
+        if (rotation == 360) {
+            rotation = 0
+        }
+        $(this).attr('data-rotate', rotation)
+        $(this).rotate(rotation);
+        if (checkPuzzle()) {
+            console.log('you win')
+            $('.message').show('slow')
+            const myTimeout = setTimeout(() => {
+                $('.message').hide('slow')
+            }, 2000)
+        }
+    });
+</script>
+
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        td{
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <center>
+        <h2>REGISTER FORM</h2>
+        <form action="">
+            <table style="width: 50%;">
+                <tr>
+                    <td>Your name</td>
+                    <td><input type="text" placeholder="Full Name"></td>
+                </tr>
+                <tr>
+                    <td>Email Address</td>
+                    <td><input type="email" name="email" id="email" placeholder="Email"></td>
+                </tr>
+                <tr>
+                    <td>Birthday</td>
+                    <td><input type="date" name="date" id="date"></td>
+                </tr>
+                <tr>
+                    <td>Birthtime</td>
+                    <td><input type="time" name="time" id="time"></td>
+                </tr>
+                <tr>
+                    <td>Gender</td>
+                    <td>
+                        <input type="radio" name="gender" id="male" value="Male">Male
+                        <input type="radio" name="gender" id="male" value="Male">Female
+                    </td>
+                </tr>
+                <tr>
+                    <td>From</td>
+                    <td>
+                        <select name="" id="">
+                            <option selected value="">Selection a country</option>
+                            <optgroup label="Asia">
+                                <option value="Vietnam">Vietnam</option>
+                                <option value="Laos">Laos</option>
+                                <option value="Cambodia">Cambodia</option>
+                                <option value="Singapore">Singapore</option>
+                              </optgroup>
+                            <optgroup label="Europe">
+                                <option value="France">France</option>
+                                <option value="Belgium">Belgium</option>
+                                <option value="Italy">Italy</option>
+                                <option value="Finland">Finland</option>
+                                <option value="Ireland">Ireland</option>
+                            </optgroup>
+                        </td>
+                </tr>
+                <tr>
+                    <td>Favorite IDE</td>
+                    <td>
+                        <input type="checkbox" name="ide[]" id="vscode" value="VSCode">Visual Studio Code<br>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type="checkbox" name="ide[]" id="sublime" value="Sublime">Sublime Text
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type="checkbox" name="ide[]" id="Eclipse" value="Eclipse">Eclipse
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type="checkbox" name="ide[]" id="Atom" value="Atom">Atom
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type="checkbox" name="ide[]" id="Inteliji" value="Inteliji">Inteliji Idea
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        TOEIC SCORE
+                    </td>
+                    <td>
+                        <input type="range" min="0" max="990" step="5">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Message</td>
+                    <td>
+                        <textarea type="text" name="" id="" rows="10" cols="20"></textarea> 
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <button>Register</button>
+                        <button>Again</button>
+                    </td>
+                </tr>
+
+            </table>
+        </form>
+    </center>
+</body>
+</html>

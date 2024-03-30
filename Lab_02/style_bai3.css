@@ -1,0 +1,197 @@
+/*
+            Các tỷ lệ kích thước màn hình mẫu:
+               - 1/12: 8.3333%
+               - 2/12: 16.6666%
+               - 3/12: 25%
+               - 4/12: 33.3333%
+               - 5/12: 41.6666%
+               - 6/12: 50%
+               - 7/12: 58.3333%
+               - 8/12: 66.6666%
+               - 9/12: 75%
+               - 10/12: 83.3333%
+               - 11/12: 91.6666%
+               - 12/12: 100%
+        */
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    padding: 0;
+    margin: 0;
+}
+
+[class*="col-"] {
+    float: left;
+    padding: 15px;
+    border: 2px solid red;
+}
+
+.content::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+
+.header {
+    background-color: darkgreen;
+    color: white;
+    padding: 24px;
+    width: 100%;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.header:hover {
+    background-color: blue;
+}
+
+.menu ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.menu li {
+    background-color: rgb(109, 109, 109);
+    color: white;
+    padding: 8px;
+    margin-bottom: 4px;
+}
+
+.menu li:hover {
+    background-color: rgb(73, 107, 184);
+}
+
+.aside {
+    padding: 8px;
+    color: white;
+    background-color: rgb(73, 107, 184);
+}
+
+.aside:hover {
+    background-color: rgb(109, 109, 109);
+    transition: 0.5s;;
+}
+
+.footer {
+    background-color: rgb(109, 109, 109);
+    color: white;
+    padding: 24px;
+    margin-top: 4px;
+    width: 100%;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.footer:hover {
+    background-color: blue;
+}
+
+.col-1 {
+    width: 8.33%;
+}
+
+.col-2 {
+    width: 16.66%;
+}
+
+.col-3 {
+    width: 25%;
+}
+
+.col-4 {
+    width: 33.33%;
+}
+
+.col-5 {
+    width: 41.66%;
+}
+
+.col-6 {
+    width: 50%;
+}
+
+.col-7 {
+    width: 58.33%;
+}
+
+.col-8 {
+    width: 66.66%;
+}
+
+.col-9 {
+    width: 75%;
+}
+
+.col-10 {
+    width: 83.33%;
+}
+
+.col-11 {
+    width: 91.66%;
+}
+
+.col-12 {
+    width: 100%;
+}
+
+@media only screen and (max-width: 768px) {
+    [class*="col-"] {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 960px) and (min-width: 768px) {
+    .col-s-1 {
+        width: 8.3333%;
+    }
+
+    .col-s-2 {
+        width: 16.6666%;
+    }
+
+    .col-s-3 {
+        width: 25%;
+    }
+
+    .col-s-4 {
+        width: 33.3333%;
+    }
+
+    .col-s-5 {
+        width: 41.6666%;
+    }
+
+    .col-s-6 {
+        width: 50%;
+    }
+
+    .col-s-7 {
+        width: 58.3333%;
+    }
+
+    .col-s-8 {
+        width: 66.6666%;
+    }
+
+    .col-s-9 {
+        width: 75%;
+    }
+
+    .col-s-10 {
+        width: 83.3333%;
+    }
+
+    .col-s-11 {
+        width: 91.6666%;
+    }
+
+    .col-s-12 {
+        width: 100%;
+    }
+}

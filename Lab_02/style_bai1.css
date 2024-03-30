@@ -1,0 +1,67 @@
+table {
+    border-collapse: collapse;
+    border: 2px red dashed;
+    width: 75%;
+}
+
+th,
+h2 {
+    text-align: center;
+}
+
+th {
+    width: 25%;
+}
+
+th,
+td {
+    text-align: center;
+}
+
+#title {
+    color: rgb(31, 172, 31);
+}
+
+/* .header-table {
+    background-color: rgb(53, 53, 184);
+    color: white;
+} */
+
+tr.header-row {
+    background-color: rgb(53, 53, 184);
+    color: white;
+}
+
+tr.header-row:hover {
+    background-color: rgb(130, 130, 225);
+}
+
+#td-lunch {
+    color: black !important;
+}
+
+.td-bold {
+    font-weight: bold;
+}
+
+.td-empty {
+    background-color: rgb(198, 192, 192);
+}
+
+.td-empty:hover {
+    background-color: rgb(141, 137, 137);
+}
+
+.td-lab {
+    background-color: rgb(244, 224, 110);
+}
+
+.td-lab:hover {
+    background-color: rgb(227, 202, 61);
+}
+
+.td-date:hover {
+    background-color: rgb(196, 49, 229);
+    color: white;
+    transition: 1s;
+}

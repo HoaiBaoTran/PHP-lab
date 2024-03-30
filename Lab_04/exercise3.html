@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>JS DOM Manipulations</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+    <style>
+
+    </style>
+
+
+    <div class="container">
+
+        <div class="row justify-content-center">
+            <div class="col-md-8 myform border rounded p-4 mt-5">
+                <div class="form-group">
+                    <label for="message">Text content:</label>
+                    <input oninput="handleOnTextChange(this)" type="text" class="form-control" id="message"
+                        placeholder="Enter new text" name="message">
+                </div>
+                <div class="form-group">
+                    <label for="color">Text color:</label>
+                    <select onchange="handleColorChange(this)" name="color" id="color" class="custom-select">
+                        <option value="black">Black</option>
+                        <option value="red">Red</option>
+                        <option value="green">Green</option>
+                        <option value="blue">Blue</option>
+                    </select>
+                </div>
+                <div class="form-group">
+
+                    <div class="custom-control custom-switch">
+                        <input onchange="handleFontWeight(this)" type="checkbox" class="custom-control-input" id="bold">
+                        <label class="custom-control-label" for="bold">Bold</label>
+                    </div>
+
+                    <div class="custom-control custom-switch">
+                        <input onchange="handleFontStyle(this)" type="checkbox" class="custom-control-input"
+                            id="italic">
+                        <label class="custom-control-label" for="italic">Italic</label>
+                    </div>
+
+                    <div class="custom-control custom-switch">
+                        <input onchange="handleFontDecoration(this)" type="checkbox" class="custom-control-input"
+                            id="underline">
+                        <label class="custom-control-label" for="underline">Underline</label>
+                    </div>
+                </div>
+                <button onclick="handleRestoreDefault(this)" type="button" class="btn btn-success">Restore
+                    Default</button>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-3">
+            <div id="message-text" class="col-md-8 alert alert-success text-center">This text will be changed
+                immediately when typing new text.</div>
+        </div>
+
+    </div>
+
+    <script>
+        const text = document.getElementById('message-text')
+
+        const handleRestoreDefault = (e) => {
+            text.style.color = 'green'
+            text.style.fontWeight = 'normal'
+            text.style.fontStyle = 'normal'
+            text.style.textDecoration = 'none'
+
+            const bold = document.getElementById('bold')
+            bold.checked = false
+
+            const italic = document.getElementById('italic')
+            italic.checked = false
+
+            const underline = document.getElementById('underline')
+            underline.checked = false
+
+            const selectOption = document.getElementById('color')
+            selectOption.value = 'black'
+
+            const message = document.getElementById('message')
+            message.value = ''
+            text.innerHTML = 'This text will be changed immediately when typing new text.'
+        }
+
+        const handleFontWeight = (e) => {
+            const isChecked = e.checked
+            if (isChecked) {
+                text.style.fontWeight = 'bold'
+            }
+            else {
+                text.style.fontWeight = 'normal'
+            }
+        }
+
+        const handleFontStyle = (e) => {
+            const isChecked = e.checked
+            if (isChecked) {
+                text.style.fontStyle = 'italic'
+            }
+            else {
+                text.style.fontStyle = 'normal'
+            }
+        }
+
+        const handleFontDecoration = (e) => {
+            const isChecked = e.checked
+            if (isChecked) {
+                text.style.textDecoration = 'underline'
+            }
+            else {
+                text.style.textDecoration = 'none'
+            }
+        }
+
+        const handleColorChange = (e) => {
+            const color = e.value
+            text.style.color = color
+        }
+
+        const handleOnTextChange = () => {
+            const message = document.getElementById('message').value
+
+            text.innerHTML = message
+        }
+    </script>
+</body>
+
+</html>

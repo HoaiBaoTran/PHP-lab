@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Student Management</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+    <style>
+        .container {
+            max-width: 600px;
+        }
+    </style>
+
+    <div class="container">
+        <h3 class="mt-5 mb-3">Student Management</h3>
+        <form>
+
+            <div class="form-group">
+                <label for="firstname">First name:</label>
+                <input type="text" class="form-control" id="firstname" placeholder="Enter first name" name="firstname">
+            </div>
+            <div class="form-group">
+                <label for="lastname">Last name:</label>
+                <input type="text" class="form-control" id="lastname" placeholder="Enter last name" name="lastname">
+            </div>
+
+            <div class="form-group ">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+            </div>
+            <button onClick="addNewStudent(this)" class="btn btn-success px-5 mr-1" type="button"
+                class="btn btn-default">Add</button>
+            <button onclick="resetInput(this)" class="btn btn-outline-primary px-5" type="button"
+                class="btn btn-default">Reset</button>
+        </form>
+
+        <br>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Firstname</th>
+                    <th>Lastname</th>
+                    <th>Email</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody id="table-content">
+                <tr>
+                    <td>John</td>
+                    <td>Doe</td>
+                    <td>john@example.com</td>
+                    <td><button class="btn btn-danger btn-sm">Delete</button></td>
+                </tr>
+                <tr>
+                    <td>Mary</td>
+                    <td>Moe</td>
+                    <td>mary@example.com</td>
+                    <td><button class="btn btn-danger btn-sm">Delete</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script>
+        let emailField = document.getElementById('email')
+        let firstNameField = document.getElementById('firstname')
+        let lastNameField = document.getElementById('lastname')
+
+        const addNewStudent = () => {
+            let tr = document.createElement('tr')
+
+            const email = emailField.value
+            const firstName = firstNameField.value
+            const lastName = lastNameField.value
+
+            if (!validate(email, firstName, lastName)) {
+                return
+            }
+
+            let td1 = document.createElement('td')
+            let td2 = document.createElement('td')
+            let td3 = document.createElement('td')
+            let td4 = document.createElement('td')
+
+            td1.innerHTML = firstName
+            td2.innerHTML = lastName
+            td3.innerHTML = email
+            td4.innerHTML = `<td><button onClick="removeStudent(this)" class="btn btn-danger btn-sm">Delete</button></td>`
+
+            tr.appendChild(td1)
+            tr.appendChild(td2)
+            tr.appendChild(td3)
+            tr.appendChild(td4)
+
+            document.getElementById('table-content').appendChild(tr)
+
+        }
+
+        const removeStudent = (element) => {
+            const td = element.parentNode
+            const tr = td.parentNode
+            tr.remove()
+        }
+
+        const validate = (email, firstName, lastName) => {
+            if (email == '' || firstName == '' || lastName == '') {
+                alert('Please fill in the form')
+                return false
+            }
+            if (!email.includes('@')) {
+                alert('Your email is not correct')
+                return false
+            }
+            return true
+
+        }
+
+        const resetInput = () => {
+            firstNameField.focus()
+            emailField.value = ''
+            firstNameField.value = ''
+            lastNameField.value = ''
+        }
+
+    </script>
+</body>
+
+</html>

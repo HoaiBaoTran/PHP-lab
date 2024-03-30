@@ -1,0 +1,53 @@
+#chat {
+    width: 75%;
+    border: 1px solid #ddd;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    margin: auto;
+}
+
+.content {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    padding: 8px 15px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.hoder {
+    display: flex;
+    align-items: flex-start;
+}
+
+.hoder .content {
+    background-color: #eee;
+    position: relative;
+    max-width: 40%;
+}
+
+.hoder .content:hover {
+    background-color: darkgray;
+    transition: 0.5s;
+}
+
+
+.hoder.me {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.me .content {
+    color: white;
+    background-color: green;
+    position: relative;
+    text-align: left;
+    max-width: 40%;
+}
+
+.me .content:hover {
+    background-color: darkgreen;
+    transition: 0.5s;
+}

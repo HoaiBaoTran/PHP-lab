@@ -25,6 +25,19 @@
     $price = '';
     $desc = '';
 
+    if (isset($_GET['id'])) {
+        require_once('./connection.php');
+        $sql = 'Select * from product where id = :id';
+        $stmt = $dbCon->prepare($sql);
+        $stmt->bindParam(":id", $_GET['id']);
+        $stmt->execute();
+        $data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        $name = $data['name'];
+        $price = $data['price'];
+        $desc = $data['description'];
+    }
+
     if (isset($_POST['name']) && isset($_POST['price']) && isset($_POST['desc'])) {
         $name = $_POST['name'];
         $price = $_POST['price'];
@@ -47,16 +60,14 @@
             $fileName = $uploadDir . basename($_FILES['image']['name']);
 
             if (move_uploaded_file($tmpFile, $fileName)) {
-                echo "move successfully";
-            } else {
-                echo "move failed<br/>";
-                $error = error_get_last();
-                if ($error !== null) {
-                    echo "Error details: " . print_r($error, true) . "\n";
+                if (isset($_GET['id'])) {
+                    include('./edit-product-process.php');
+                } else {
+                    include('./add-product-process.php');
                 }
+                echo '<script>window.location.replace("./index.php");</script>';
+                exit;
             }
-
-            echo 'good';
         }
     }
     ?>

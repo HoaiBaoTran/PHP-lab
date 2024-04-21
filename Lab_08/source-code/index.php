@@ -114,7 +114,7 @@ if (!isset($_SESSION['user'])) {
 
         <tr class="control" style="text-align: right; font-weight: bold; font-size: 17px">
             <td colspan="5">
-                <p>Số lượng sản phẩm: 2</p>
+                <p id='product-number'>Số lượng sản phẩm: 2></p>
             </td>
         </tr>
     </table>
@@ -131,11 +131,11 @@ if (!isset($_SESSION['user'])) {
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <p>Bạn có chắc rằng muốn xóa <strong>iPhone XS MAX</strong> ?</p>
+                    <p>Bạn có chắc rằng muốn xóa <strong id='product-name-message'>iPhone XS MAX</strong> ?</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-danger">Xóa</button>
+                    <button onclick="deleteProduct()" type="button" class="btn btn-danger">Xóa</button>
                 </div>
 
             </div>
@@ -147,6 +147,7 @@ if (!isset($_SESSION['user'])) {
 </body>
 
 <script>
+    var deleteId = -1
     $(document).ready(function() {
         $.get("http://localhost:8080/get-product.php", function(data, status) {
             const productList = JSON.parse(data).data
@@ -157,13 +158,33 @@ if (!isset($_SESSION['user'])) {
                     <td>${product.name}</td>
                     <td>${product.price}</td>
                     <td>${product.description}</td>
-                    <td><a href="add_product.php">Edit</a> | <a href="#" class="delete">Delete</a></td>
+                    <td><a href="add_product.php?id=${product.id}">Edit</a> | <a data-id=${product.id} data-name='${product.name}' onclick="handleDelete(this)" class="delete">Delete</a></td>
                 </tr>
                 `
                 $('#table-product').append(tr)
+                $('#product-number').html(`Số lượng sản phẩm: ${productList.length}`)
             })
         })
     })
+
+    const handleDelete = (e) => {
+        deleteId = e.getAttribute('data-id')
+        $('#product-name-message').html(e.getAttribute('data-name'))
+        $('#myModal').modal('show')
+    }
+
+    const deleteProduct = () => {
+        const id = {
+            'id': deleteId
+        }
+        $.post('http://localhost:8080/delete-product-process.php', id, function(data, status) {
+            if (status) {
+                window.location.replace("./index.php")
+            } else {
+                console.log(data)
+            }
+        })
+    }
 </script>
 
 </html>

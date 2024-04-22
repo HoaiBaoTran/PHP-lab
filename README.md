@@ -6,4 +6,5 @@ Lab - 4 Done
 Lab - 5 Done
 Lab - 6 Done
 Lab - 7 Skip
-lab - 8 Doing
+lab - 8 Done
+lab - 9 Done
